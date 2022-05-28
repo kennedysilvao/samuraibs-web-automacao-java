@@ -7,7 +7,7 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-@DisplayName("Testes Web do Módulo de Cadastro")
+@DisplayName("Signup module web tests")
 public class SignupTest {
     private WebDriver driver;
 
@@ -27,7 +27,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Deve registrar um usuário com sucesso")
+    @DisplayName("Should be signup with sucess")
     public void testRegisterANewUserWithSucess() {
         String expectMessage = new LoginPage(driver)
                 .navigateToPageSignup()
@@ -39,7 +39,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Campo nome é obrigatório")
+    @DisplayName("Field name is required")
     public void testNameIsRequired() {
         String nameIsRequired = new LoginPage(driver)
                 .navigateToPageSignup()
@@ -50,7 +50,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Campo email é obrigatório")
+    @DisplayName("Field email is required")
     public void testEmailIsRequired() {
         String emailIsRequired = new LoginPage(driver)
                 .navigateToPageSignup()
@@ -61,7 +61,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Campo senha é obrigatório")
+    @DisplayName("Field password is required")
     public void testPasswordIsRequired() {
         String passIsRequired = new LoginPage(driver)
                 .navigateToPageSignup()
@@ -72,7 +72,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Email deve ser válido")
+    @DisplayName("Email should be valid")
     public void testEmailShouldBeValid() {
         String emailIncorrect = new LoginPage(driver)
                 .navigateToPageSignup()
@@ -84,7 +84,7 @@ public class SignupTest {
     }
 
     @Test
-    @DisplayName("Senha deve ter pelo menos 6 caractéres")
+    @DisplayName("Password should not be curt")
     public void testPasswordCurt() {
         String curtPass = new LoginPage(driver)
                 .navigateToPageSignup()

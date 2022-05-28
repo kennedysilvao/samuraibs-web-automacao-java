@@ -7,6 +7,7 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
+@DisplayName("Login module web tests")
 public class LoginTest {
 
     private WebDriver driver;
@@ -27,7 +28,7 @@ public class LoginTest {
     }
 
     @Test
-    @DisplayName("Deve fazer login com sucesso")
+    @DisplayName("Should be login with sucess")
     public void testAuthenticateWithSucess() {
         String userLogged = new LoginPage(driver)
                 .fillCredentials()
