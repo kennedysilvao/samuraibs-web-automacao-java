@@ -1,16 +1,11 @@
 package modules.signup;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
-import pages.SignupPage;
 
 import java.time.Duration;
-import java.util.List;
 
 @DisplayName("Testes Web do Módulo de Cadastro")
 public class SignupTest {
@@ -36,7 +31,7 @@ public class SignupTest {
     public void testRegisterANewUserWithSucess() {
         String expectMessage = new LoginPage(driver)
                 .navigateToPageSignup()
-                .fillDataFields()
+                .fillDataFields("Kennedy Silva de Oliveira", "kennedy@automacao.com", "pwd123")
                 .submitRegisterForm()
                 .captureMessage();
 
@@ -81,7 +76,7 @@ public class SignupTest {
     public void testEmailShouldBeValid() {
         String emailIncorrect = new LoginPage(driver)
                 .navigateToPageSignup()
-                .fillDataFieldsWithEmailIncorrect()
+                .fillDataFields("Kennedy Silva de Oliveira", "kennedy.automacao.com", "pwd123")
                 .submitRegisterFormWithDataIncorrect()
                 .verifyAlertMessageEmailIsIncorrect();
 
@@ -93,10 +88,15 @@ public class SignupTest {
     public void testPasswordCurt() {
         String curtPass = new LoginPage(driver)
                 .navigateToPageSignup()
-                .fillDataFieldsWithCurtPassword()
+                .fillDataFields("Kennedy Silva de Oliveira", "kennedy@automacao.com", "pwd12")
                 .submitRegisterFormWithDataIncorrect()
                 .verifyAlertMessageCurtPass();
 
         Assertions.assertEquals("Pelo menos 6 caracteres", curtPass);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        driver.quit();
     }
 }

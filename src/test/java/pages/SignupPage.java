@@ -10,26 +10,10 @@ public class SignupPage {
         this.driver = driver;
     }
 
-    public SignupPage fillDataFields() {
-        driver.findElement(By.cssSelector("input[placeholder^=Nome]")).sendKeys("Kennedy Silva de Oliveira");
-        driver.findElement(By.cssSelector("input[placeholder$=email]")).sendKeys("kennedy@automacao.com");
-        driver.findElement(By.cssSelector("input[placeholder*=senha]")).sendKeys("pwd123");
-
-        return this;
-    }
-
-    public SignupPage fillDataFieldsWithEmailIncorrect() {
-        driver.findElement(By.cssSelector("input[placeholder^=Nome]")).sendKeys("Kennedy Silva de Oliveira");
-        driver.findElement(By.cssSelector("input[placeholder$=email]")).sendKeys("kennedy.automacao.com");
-        driver.findElement(By.cssSelector("input[placeholder*=senha]")).sendKeys("pwd123");
-
-        return this;
-    }
-
-    public SignupPage fillDataFieldsWithCurtPassword() {
-        driver.findElement(By.cssSelector("input[placeholder^=Nome]")).sendKeys("Kennedy Silva de Oliveira");
-        driver.findElement(By.cssSelector("input[placeholder$=email]")).sendKeys("kennedy@automacao.com");
-        driver.findElement(By.cssSelector("input[placeholder*=senha]")).sendKeys("pwd12");
+    public SignupPage fillDataFields(String name, String email, String password) {
+        driver.findElement(By.cssSelector("input[placeholder^=Nome]")).sendKeys(name);
+        driver.findElement(By.cssSelector("input[placeholder$=email]")).sendKeys(email);
+        driver.findElement(By.cssSelector("input[placeholder*=senha]")).sendKeys(password);
 
         return this;
     }
@@ -47,7 +31,7 @@ public class SignupPage {
     }
 
     public String verifyAlertMessageCurtPass() {
-        return driver.findElement(By.xpath("//div//small[contains(text(), 'Pelo menos 6 caracteres')]")).getText();
+        return driver.findElement(By.xpath("//div//small[contains(text(),'Pelo menos 6 caracteres')]")).getText();
     }
 
     public String verifyAlertMessageNameIsRequired() {

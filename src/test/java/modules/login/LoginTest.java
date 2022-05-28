@@ -1,9 +1,6 @@
 package modules.login;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
@@ -38,5 +35,10 @@ public class LoginTest {
                 .verifyUserLogged();
 
         Assertions.assertEquals("Kennedy Silva de Oliveira", userLogged);
+    }
+
+    @AfterEach
+    public void afterEach() {
+        driver.quit();
     }
 }
