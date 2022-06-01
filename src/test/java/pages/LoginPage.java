@@ -26,9 +26,9 @@ public class LoginPage {
         return driver.findElement(By.cssSelector("div[class*='toast'] p")).getText();
     }
 
-    public LoginPage fillCredentials() {
-        driver.findElement(By.cssSelector("input[placeholder='Seu email']")).sendKeys("kennedy@automacao.com");
-        driver.findElement(By.cssSelector("input[placeholder$=secreta]")).sendKeys("pwd123");
+    public LoginPage fillCredentials(String email, String pass) {
+        driver.findElement(By.cssSelector("input[placeholder='Seu email']")).sendKeys(email);
+        driver.findElement(By.cssSelector("input[placeholder$=secreta]")).sendKeys(pass);
 
         return this;
     }

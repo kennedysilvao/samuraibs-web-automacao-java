@@ -1,21 +1,51 @@
 package modules.login;
 
+import database.Database;
+import factories.browserFactory.BrowserFactory;
+import factories.usuarioFactory.UsuarioDataFactory;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 
+import java.sql.SQLException;
 import java.time.Duration;
+
+import static io.restassured.RestAssured.*;
 
 @DisplayName("Login module web tests")
 public class LoginTest {
-
+    private static Database db = new Database();
+    private BrowserFactory navegador = new BrowserFactory();
     private WebDriver driver;
+
+    @BeforeAll
+    public static void setup() {
+        try {
+            db.deleteUser("kennedy@automacao.com");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        baseURI = "https://samuraibs-api-kennedy.herokuapp.com";
+        basePath = "/";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(UsuarioDataFactory.userData())
+                .when()
+                .post("/users")
+                .then()
+                .statusCode(200);
+    }
 
     @BeforeEach
     public void beforeEach() {
         // Configuração do chrome driver
-        System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver\\chromedriver.exe" );
+        navegador.chooseBrowser("webdriver.chrome.driver", "C:\\drivers\\chromedriver\\chromedriver.exe" );
+//        System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver\\chromedriver.exe");
         this.driver = new ChromeDriver();
 
         // Maximizar navegador
@@ -31,7 +61,7 @@ public class LoginTest {
     @DisplayName("Should be login with sucess")
     public void testAuthenticateWithSucess() {
         String userLogged = new LoginPage(driver)
-                .fillCredentials()
+                .fillCredentials(UsuarioDataFactory.userData().getEmail(), UsuarioDataFactory.userData().getPassword())
                 .submitCredentials()
                 .verifyUserLogged();
 

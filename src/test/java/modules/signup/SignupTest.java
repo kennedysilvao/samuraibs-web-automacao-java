@@ -1,20 +1,26 @@
 package modules.signup;
 
+import database.Database;
+import factories.browserFactory.BrowserFactory;
+import factories.usuarioFactory.UsuarioDataFactory;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 
+import java.sql.SQLException;
 import java.time.Duration;
 
 @DisplayName("Signup module web tests")
 public class SignupTest {
     private WebDriver driver;
+    private Database db = new Database();
+    private BrowserFactory navegador = new BrowserFactory();
 
     @BeforeEach
     public void beforeEach() {
         // Configuração do chrome driver
-        System.setProperty("webdriver.chrome.driver", "C:\\drivers\\chromedriver\\chromedriver.exe" );
+        navegador.chooseBrowser("webdriver.chrome.driver", "C:\\drivers\\chromedriver\\chromedriver.exe" );
         this.driver = new ChromeDriver();
 
         // Maximizar navegador
@@ -29,9 +35,15 @@ public class SignupTest {
     @Test
     @DisplayName("Should be signup with sucess")
     public void testRegisterANewUserWithSucess() {
+        try {
+            db.deleteUser("kennedy@automacao.com");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
         String expectMessage = new LoginPage(driver)
                 .navigateToPageSignup()
-                .fillDataFields("Kennedy Silva de Oliveira", "kennedy@automacao.com", "pwd123")
+                .fillDataFields(UsuarioDataFactory.userData().getName(), UsuarioDataFactory.userData().getEmail(), UsuarioDataFactory.userData().getPassword())
                 .submitRegisterForm()
                 .captureMessage();
 

@@ -39,11 +39,11 @@ public class SignupPage {
     }
 
     public String verifyAlertMessageEmailIsRequired() {
-       return driver.findElement(By.xpath("//div//small[contains(text(), 'E-mail é obrigatório')]")).getText();
+        return driver.findElement(By.xpath("//div//small[contains(text(), 'E-mail é obrigatório')]")).getText();
     }
 
     public String verifyAlertMessagePasswordIsRequired() {
-       return driver.findElement(By.xpath("//div//small[contains(text(), 'Senha é obrigatória')]")).getText();
+        return driver.findElement(By.xpath("//div//small[contains(text(), 'Senha é obrigatória')]")).getText();
     }
 
     public String verifyAlertMessageEmailIsIncorrect() {
