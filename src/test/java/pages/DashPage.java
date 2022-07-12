@@ -2,6 +2,11 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import utils.Utils;
+
+import java.io.IOException;
+
+import static utils.Utils.takeScreenshot;
 
 public class DashPage {
     private WebDriver driver;
@@ -9,8 +14,10 @@ public class DashPage {
     public DashPage(WebDriver driver) {
         this.driver = driver;
     }
-
-    public String verifyUserLogged() {
-        return driver.findElement(By.cssSelector("a strong")).getText();
+    private Utils utils = new Utils();
+    public String verifyUserLogged() throws IOException {
+        String texto = driver.findElement(By.cssSelector("a strong")).getText();
+        takeScreenshot(driver, "/loginTest/evidencia");
+        return texto;
     }
 }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
+import utils.Utils;
 
 import java.sql.SQLException;
 import java.time.Duration;
@@ -17,6 +18,7 @@ public class SignupTest {
     private Database db = new Database();
     private BrowserFactory navegador = new BrowserFactory();
 
+    private Utils utils = new Utils();
     @BeforeEach
     public void beforeEach() {
         // Configuração do chrome driver

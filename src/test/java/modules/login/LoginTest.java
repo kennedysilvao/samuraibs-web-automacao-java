@@ -1,5 +1,8 @@
 package modules.login;
 
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.HTMLReporter;
 import database.Database;
 import factories.browserFactory.BrowserFactory;
 import factories.usuarioFactory.UsuarioDataFactory;
@@ -9,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.time.Duration;
 
@@ -22,6 +26,7 @@ public class LoginTest {
 
     @BeforeAll
     public static void setup() {
+
         try {
             db.deleteUser("kennedy@automacao.com");
         } catch (SQLException e) {
@@ -59,12 +64,13 @@ public class LoginTest {
 
     @Test
     @DisplayName("Should be login with sucess")
-    public void testAuthenticateWithSucess() {
+    public void testAuthenticateWithSucess() throws IOException {
         String userLogged = new LoginPage(driver)
                 .fillCredentials(UsuarioDataFactory.userData().getEmail(), UsuarioDataFactory.userData().getPassword())
                 .submitCredentials()
                 .verifyUserLogged();
 
+        System.out.println(LoginTest.class);
         Assertions.assertEquals("Kennedy Silva de Oliveira", userLogged);
     }
 
