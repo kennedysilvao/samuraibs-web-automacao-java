@@ -41,4 +41,8 @@ public class LoginPage {
         return new DashPage(driver);
     }
 
+    public void teste() {
+        return;
+    }
+
 }
